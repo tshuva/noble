@@ -1,7 +1,7 @@
-import { UserPreferences } from "./types";
+import { UserPreference } from "./types";
 
 type UsersPreferences = {
-  [k in string]: UserPreferences;
+  [k in string]: UserPreference;
 };
 
 export const userPreferences = {
@@ -9,5 +9,3 @@ export const userPreferences = {
     Object.assign(this, payload);
   },
 };
-
-console.log(userPreferences);

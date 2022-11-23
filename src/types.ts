@@ -4,7 +4,7 @@ export interface Introduction {
   introduction: string;
 }
 
-export interface UserPreferences {
+export interface UserPreference {
   userName: string;
   language: string;
 }

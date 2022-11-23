@@ -1,8 +1,8 @@
 import crypto from "crypto";
 import { userPreferences } from "../dal";
-import { UserPreferences } from "../types";
+import { UserPreference } from "../types";
 
-export const getUserPreferences = (userToken: string): UserPreferences =>
+export const getUserPreferences = (userToken: string): UserPreference =>
   userPreferences[userToken];
 
 export const postUserPreferences = (userName: string, language: string) => {

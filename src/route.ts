@@ -1,7 +1,7 @@
 import { Router, Request } from "express";
 import { introduction } from "./Bl";
 import { getUserPreferences, postUserPreferences } from "./Bl/user";
-import { Introduction, UserPreferences } from "./types";
+import { Introduction, UserPreference } from "./types";
 
 const router = Router();
 
@@ -9,7 +9,7 @@ interface GetIntroduction {
   articleName: string;
 }
 interface PostUser extends Request {
-  body: UserPreferences;
+  body: UserPreference;
 }
 
 router.get(

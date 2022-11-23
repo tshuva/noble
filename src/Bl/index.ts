@@ -7,10 +7,10 @@ export const introduction = async (
   if (!/^[\p{L}0-9_-]+$/u.test(articleName)) {
     throw new Error(`article name : ${articleName} is wrong`);
   }
-  const introduction = fitIntroduction(
+
+  return fitIntroduction(
     fromFetchToIntroduction(await fetchArticle(articleName, language))
   );
-  return introduction;
 };
 
 const fitIntroduction = (introduction: string) =>
@@ -23,7 +23,7 @@ const fromFetchToIntroduction = (WikiRes: any) =>
   WikiRes.query.pages[0].extract as string;
 
 const fetchArticle = async (articleName: string, language: string) =>
-  fetch(`
-    https://${language}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${articleName}&formatversion=2&exintro=1`).then(
-    (res) => res.json()
-  );
+  fetch(WikiUrl(articleName, language)).then((res) => res.json());
+
+const WikiUrl = (articleName: string, language: string) =>
+  `https://${language}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${articleName}&formatversion=2&exintro=1`;
