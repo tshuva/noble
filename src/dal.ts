@@ -1,8 +1,13 @@
-export let userPreferences: string;
+import { UserPreferences } from "./types";
 
-export const signup = (payload: string) => {
-  console.log(payload);
-
-  userPreferences = payload;
-  return userPreferences;
+type UsersPreferences = {
+  [k in string]: UserPreferences;
 };
+
+export const userPreferences = {
+  signup: function (payload: UsersPreferences) {
+    Object.assign(this, payload);
+  },
+};
+
+console.log(userPreferences);

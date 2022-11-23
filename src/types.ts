@@ -1,8 +1,10 @@
-export interface GetIntroduction {
+export interface Introduction {
+  scrapeDate: number;
   articleName: string;
   introduction: string;
 }
 
-export type Introduction = GetIntroduction & {
-  scrapeDate: number;
-};
+export interface UserPreferences {
+  userName: string;
+  language: string;
+}

@@ -1,5 +1,5 @@
-import { gunzip } from "node:zlib";
 import fetch from "node-fetch";
+
 export const introduction = async (
   articleName: string,
   language: string
@@ -24,7 +24,6 @@ const fromFetchToIntroduction = (WikiRes: any) =>
 
 const fetchArticle = async (articleName: string, language: string) =>
   fetch(`
-    
     https://${language}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${articleName}&formatversion=2&exintro=1`).then(
     (res) => res.json()
   );
