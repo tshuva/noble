@@ -12,7 +12,7 @@ export const getUserPreferences = (userToken: string) =>
 export const postUserPreferences = (userName: string, language: string) => {
   const token = genToken(userName);
   usersPreferences.signup({ [token]: { userName, language } });
-  return token;
+  return { token };
 };
 
 const genToken = (userName: string) =>

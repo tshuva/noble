@@ -1,7 +1,12 @@
 import { Router, Request } from "express";
 import { introduction } from "./Bl";
 import { getUserPreferences, postUserPreferences } from "./Bl/user";
-import { Introduction, UserPreference } from "./types";
+import {
+  Introduction,
+  UserPreference,
+  postUserResponse,
+  XAuthentication,
+} from "../../types";
 
 const router = Router();
 
@@ -17,7 +22,7 @@ router.get(
   async (req: Request<GetIntroduction, {}, {}, string>, res, next) => {
     const articleName = req.params.articleName;
     const scrapeDate = Date.now();
-    const UserToken = req.get("x-authentication");
+    const UserToken = req.get(XAuthentication);
 
     try {
       res.send({
@@ -34,8 +39,9 @@ router.get(
   }
 );
 
-router.post("/user", (req: PostUser, res, next) =>
-  res.send(postUserPreferences(req.body.userName, req.body.language))
-);
+router.post("/user", (req: PostUser, res, next) => {
+  let a = postUserPreferences(req.body.userName, req.body.language);
+  res.send(a);
+});
 
 export default router;

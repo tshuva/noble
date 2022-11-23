@@ -8,3 +8,9 @@ export interface UserPreference {
   userName: string;
   language: string;
 }
+
+export interface postUserResponse {
+  token: string;
+}
+
+export const XAuthentication: string = "x-authentication";

@@ -19,7 +19,7 @@
     "resolveJsonModule": true,
     "baseUrl": "src"
   },
-  "include": ["src/**/*", "__tests__/**/*", "src/index.ts"],
+  "include": ["src/**/*", "__tests__/**/*", "src/index.ts", "../types.ts"],
   "exclude": ["node_modules/**/*", "dist", "**/build/**/**"],
   "ts-node": {
     "transpileOnly": true,

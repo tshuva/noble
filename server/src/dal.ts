@@ -1,4 +1,4 @@
-import { UserPreference } from "./types";
+import { UserPreference } from "../../types";
 
 type UserPreferences = {
   [k in string]: UserPreference;
