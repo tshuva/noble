@@ -1,23 +1,22 @@
 import fetch from "node-fetch";
 
+import { tryCatch } from "../utils";
+
 export const introduction = async (
   articleName: string,
   language: string
-): Promise<string> => {
-  if (!/^[\p{L}0-9_-]+$/u.test(articleName)) {
-    throw new Error(`article name : ${articleName} is wrong`);
-  }
-
-  return fitIntroduction(
-    fromFetchToIntroduction(await fetchArticle(articleName, language))
+): Promise<string> =>
+  tryCatch(
+    /^[\p{L}0-9_-]+$/u.test(articleName),
+    async () =>
+      fitIntroduction(
+        fromFetchToIntroduction(await fetchArticle(articleName, language))
+      ),
+    `article name : ${articleName} is wrong`
   );
-};
 
 const fitIntroduction = (introduction: string) =>
-  introduction
-    .split("<p>")[1]
-    .replaceAll(/(<([^>]+)>)/gi, "")
-    .replaceAll(/(\r\n|\n|\r)/gm, "");
+  introduction.split("<p>")[1].replaceAll(/(<([^>]+)>|\r\n|\n|\r)/gim, "");
 
 const fromFetchToIntroduction = (WikiRes: any) =>
   WikiRes.query.pages[0].extract as string;

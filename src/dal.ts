@@ -1,11 +1,17 @@
 import { UserPreference } from "./types";
 
-type UsersPreferences = {
+type UserPreferences = {
   [k in string]: UserPreference;
 };
 
-export const userPreferences = {
-  signup: function (payload: UsersPreferences) {
-    Object.assign(this, payload);
+interface UsersPreferences {
+  signup: (payload: UserPreferences) => void;
+  users: UserPreferences;
+}
+
+export const usersPreferences: UsersPreferences = {
+  signup: function (payload: UserPreferences) {
+    Object.assign(this.users, payload);
   },
+  users: {},
 };

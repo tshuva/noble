@@ -1,17 +1,21 @@
 import crypto from "crypto";
-import { userPreferences } from "../dal";
-import { UserPreference } from "../types";
+import { usersPreferences } from "../dal";
 
-export const getUserPreferences = (userToken: string): UserPreference =>
-  userPreferences[userToken];
+import { tryCatch } from "../utils";
 
+export const getUserPreferences = (userToken: string) =>
+  tryCatch(
+    Boolean(usersPreferences.users[userToken]),
+    () => usersPreferences.users[userToken],
+    "user does not exist"
+  );
 export const postUserPreferences = (userName: string, language: string) => {
   const token = genToken(userName);
-  userPreferences.signup({ [token]: { userName, language } });
+  usersPreferences.signup({ [token]: { userName, language } });
   return token;
 };
 
-const genToken = (userName) =>
+const genToken = (userName: string) =>
   crypto
     .createHash("md5")
     .update(`${userName} ${crypto.randomBytes(20).toString("hex")}`)
